@@ -1,5 +1,6 @@
 import http from "k6/http"
 import { check, sleep } from "k6"
+import cheerio from "cheerio"
 
 // 1. init code
 // run once per vu (virtual user)
@@ -27,12 +28,19 @@ export default function () {
   // data can be passed via parameter from setup
   // The duration it takes for a VU to complete one loop, or iteration,
   // of this function is what we refer to as "VU iteration duration".
-  let res = http.get("https://api.thecatapi.com/v1/images/search")
+  const res = http.get("https://loadimpact.com/")
+  const $ = cheerio.load(res.body)
+  const title = $("head title").text()
+
   check(res, { "status was 200": r => r.status == 200 })
+  check(res, {
+    "has correct title":
+      title === "Load Impact | Performance testing for DevOps teams",
+  })
   sleep(1)
 }
 
-export function teardown(data) {
+export function teardown() {
   // 4. teardown code
   // called once per test
 }

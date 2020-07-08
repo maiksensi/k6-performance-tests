@@ -7,15 +7,15 @@ This repository contains a demo to show the usage of k6 as a load generator.
 - Start k6 with a load testing script `k6 run loadTest.js`
 
 == Branches
-=== basic
-The basic branch shows how k6 can be used locally and without any additional dependencies.
+=== mainline
+The mainline branch shows how k6 can be used locally and without any additional dependencies.
 Run script via `k6 run loadTest.js`. VUs and duration can be startup parameters: `k6 run --vus 10 --duration 30s loadTest.js`
 
-=== docker
-The docker branch shows how k6 can be used from inside a docker container. Run the container via `docker run -v ~/git/k6-performance-tests/:/src -i loadimpact/k6 run /src/loadTest.js`
+==== Docker Usage
+k6 can be used via docker. Run the container via `docker run -v ~/git/k6-performance-tests/:/src -i loadimpact/k6 run /src/loadTest.js`
 
-=== dockergrafana
-The dockergrafana branch shows how k6 can be used from inside a docker container while reporting to a influxdb and grafana to visualize the results. On first run: 
+==== Docker and Grafana Usage
+k6 can report to influx (or other timetable series databases) and grafana to visualize the results. On first run: 
 - Start the grafana and influx containers via `docker-compose up -d --build`
 - Setup Grafana password at `localhost:3000`
 - Setup Grafana Dashboard
@@ -23,6 +23,10 @@ The dockergrafana branch shows how k6 can be used from inside a docker container
 
 === webpack
 The webpack branch shows the usage of external dependencies when k6 is running inside a docker container.
+- Run `npm i` to install all dependencies
+- Run `npm run bundle` to generate bundle
+- Use `dist/main.bundle.js` as test source via `docker run --network k6-performance-tests_default -v ~/git/k6-performance-tests/dist:/src -i loadimpact/k6 run --out "influxdb=http://admin:admin@influxdb:8086/k6db" /src/main.bundle.js`
+- Run `npm run test` to run bundling and load tests
 
 === groups 
 The groups branch shows how tests can be structured via groups. 
