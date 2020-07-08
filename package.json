@@ -5,7 +5,8 @@
   "main": "runLoad.js",
   "scripts": {
     "bundle": "webpack",
-    "test": "npm run bundle && docker run --network k6-performance-tests_default -v ~/git/k6-performance-tests/dist:/src -i loadimpact/k6 run --out \"influxdb=http:\/\/admin:admin@influxdb:8086/k6db\" /src/main.bundle.js"
+    "convert": "postman-to-k6 collection.json -o k6-script.js",
+    "test": "npm run bundle && docker run --network k6-performance-tests_default -v ~/git/k6-performance-tests/dist:/src -i loadimpact/k6 run --out \"influxdb=http://admin:admin@influxdb:8086/k6db\" /src/main.bundle.js"
   },
   "keywords": [],
   "author": "Maik Figura",
@@ -16,6 +17,7 @@
     "babel-loader": "^8.1.0",
     "core-js": "^3.6.5",
     "k6": "0.0.0",
+    "postman-to-k6": "^1.1.0",
     "prettier": "^2.0.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"

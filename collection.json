@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "e69814c7-39fc-456d-949b-8f4cdf60baf5",
+		"name": "My Cat API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "/images/search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "26c5f130-8503-4c5f-974e-065dfa3af5dc",
+								"exec": [
+									"pm.test(\"response is ok\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response should be okay to process\", function () { ",
+									"    pm.response.to.not.be.error; ",
+									"    pm.response.to.not.have.jsonBody(\"error\"); ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{x-api-key}}",
+								"description": "[optional] without it only the a basic set of images can be searched"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}v1/images/search?limit=25",
+							"host": [
+								"{{endpoint}}v1"
+							],
+							"path": [
+								"images",
+								"search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "full",
+									"description": "[optional] thumb , small, med or full - small is perfect for Discord",
+									"disabled": true
+								},
+								{
+									"key": "mime_types",
+									"value": "jpg",
+									"description": "[optional] a comma separated strig of types to return e.g. jpg,png for static, or gif for gifs",
+									"disabled": true
+								},
+								{
+									"key": "format",
+									"value": "json",
+									"description": "[optional] json | src",
+									"disabled": true
+								},
+								{
+									"key": "has_breeds",
+									"value": "false",
+									"description": "[optional] - only return images with breed data",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "RANDOM",
+									"description": "[optional] default:RANDOM - RANDOM | ASC | DESC",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"description": "[optional] paginate through results",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "25",
+									"description": "[optional] number of results to return, up to 25 with a valid API-Key"
+								}
+							]
+						},
+						"description": "Searchs all approved images. \n\n\n#### Query Parameters\n\n| Key  | Required | Description                                                                                     |\n|------|----------|-------------------------------------------------------------------------------------------------|\n| size | optional | The size of image to return - `small`, `med` or `full`. `small` is perfect for Discord. Defaults to `med`\n| mime_types | optional | Comma delimited string of the image types to return `gif`, `jpg`, or`png`. Defaults to return all types `jpg,gif,png`.                                                    |\n| format | optional | Response format `json`, or`src`. `src` will redirect straight to the image, so is useful for putting a link straight into HTML as the 'src' on an 'img' tag. Defaults to `json`                            |\n| order | optional | The order to return results in. `RANDOM`, `ASC` or `DESC`. If either `ASC` or `DESC` is passed then the Pagination headers will be on the response allowing you to see the total amount of results, and your current page. Default is `RANDOM`                      |\n| page | optional | Integer - used for Paginating through all the results. Only used when order is `ASC` or `DESC`                      |\n| limit | optional | Integer - number of results to return. Without an API Key you can only pass `1`, with a Key you can pass up to `25`. Default is `1`                      |\n| category_ids | optional | Comma delimited string of integers, matching the `id`'s of the Categories to filter the search. These categories can found in the `/v1/categories` request. e.g. category_ids=2                      |\n| breed_ids | optional | Comma delimited string of integers, matching the `id`'s of the Breeds to filter the search. These categories can found in the `/v1/breeds` request                      |\n| has_breeds | optional | Only return images which have breed data attached. Integer - `0` or `1`. Default is `0`                        |\n\n### Pagination\nIf order=ASC or order=DESC is passed, then the response will contain these Pagination headers\n\n| Key  | Description                                                                                     |\n|------|-------------------------------------------------------------------------------------------------|\n| Pagination-Count | Integer - the total amount of results matching your search|\n| Pagination-Page  | Integer - the current page\n| Pagination-Limit | Integer - amount of results being returned per page\n|"
+					},
+					"response": [
+						{
+							"name": "/images/search",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{YOUR-API-KEY}}",
+										"description": "[optional] without it only the a basic set of images can be searched"
+									}
+								],
+								"url": {
+									"raw": "{{endpoint}}v1/images/search?format=json",
+									"host": [
+										"{{endpoint}}v1"
+									],
+									"path": [
+										"images",
+										"search"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "med",
+											"description": "[optional] thumb , small, med or full - small is perfect for Discord",
+											"disabled": true
+										},
+										{
+											"key": "mime_types",
+											"value": "jpg",
+											"description": "[optional] a comma separated strig of types to return e.g. jpg,png for static, or gif for gifs",
+											"disabled": true
+										},
+										{
+											"key": "format",
+											"value": "json",
+											"description": "[optional] json | src"
+										},
+										{
+											"key": "has_breeds",
+											"value": "false",
+											"description": "[optional] - only return images with breed data",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "RANDOM",
+											"description": "[optional] default:RANDOM - RANDOM | ASC | DESC",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"description": "[optional] paginate through results",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "1",
+											"description": "[optional] number of results to return, up to 25 with a valid API-Key",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "post-check=0, pre-check=0",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip",
+									"name": "Content-Encoding",
+									"description": "The type of encoding used on the data."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Aug 2018 06:36:16 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Expires",
+									"value": "Tue, 03 Jul 2001 06:00:00 GMT",
+									"name": "Expires",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Sun Aug 26 2018 06:36:16 GMT+0000 (UTC)",
+									"name": "Last-Modified",
+									"description": "The last modified date for the requested object, in RFC 2822 format"
+								},
+								{
+									"key": "Server",
+									"value": "nginx/1.12.1",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains",
+									"name": "Strict-Transport-Security",
+									"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"key": "Vary",
+									"value": "Origin",
+									"name": "Vary",
+									"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff",
+									"name": "X-Content-Type-Options",
+									"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off",
+									"name": "X-DNS-Prefetch-Control",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen",
+									"name": "X-Download-Options",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN",
+									"name": "X-Frame-Options",
+									"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+								},
+								{
+									"key": "X-Response-Time",
+									"value": "41ms",
+									"name": "X-Response-Time",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block",
+									"name": "X-XSS-Protection",
+									"description": "Cross-site scripting (XSS) filter"
+								}
+							],
+							"cookie": [],
+							"body": "[{\"id\":\"3fg\",\"url\":\"https://25.media.tumblr.com/tumblr_lqik92AS4I1qfy8klo1_500.jpg\",\"breeds\":[],\"categories\":[]}]"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "48ae3198-df75-42d6-9376-057e82c82177",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e62f5995-334c-4f7c-9c06-d38aaaca71ad",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "8b079d27-23dc-45cf-959d-b989de2711f9",
+			"key": "endpoint",
+			"value": "https://api.thecatapi.com/",
+			"type": "string"
+		},
+		{
+			"id": "e03f96b8-0200-4038-8b11-4f96ff346a08",
+			"key": "x-api-key",
+			"value": "ab8813d8-db26-4fd2-9635-3b0f2a624c5d",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

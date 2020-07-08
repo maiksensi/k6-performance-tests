@@ -66,3 +66,9 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# k6 bundle libs
+libs/
+
+# k6 generated postman script
+k6-script.js

@@ -30,3 +30,9 @@ The webpack branch shows the usage of external dependencies when k6 is running i
 
 === groups 
 The groups branch shows how tests can be structured via groups. 
+
+=== Postman Export
+k6 scripts can be generated from jmeter or postman collections via `postman-to-k6`. Also available as docker container. 
+- Run `npm i -D postman-to-k6`
+- Run `npm run convert`
+- Run k6 with `k6-script.js`: `k6 run k6-script.js`
