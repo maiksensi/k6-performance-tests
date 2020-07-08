@@ -36,3 +36,6 @@ k6 scripts can be generated from jmeter or postman collections via `postman-to-k
 - Run `npm i -D postman-to-k6`
 - Run `npm run convert`
 - Run k6 with `k6-script.js`: `k6 run k6-script.js`
+
+=== HAR Session Recording Export
+k6 can also convert a HAR file to a test file! Go try it out! https://k6.io/docs/using-k6/session-recording-har-support
